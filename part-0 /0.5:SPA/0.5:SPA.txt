@@ -1,0 +1,48 @@
+SINGLE PAGE APPLICATION
+
+Create a diagram depicting the situation where the user goes to the 
+single page app version of the notes app at 
+https://studies.cs.helsinki.fi/exampleapp/spa.
+
+
+
+First of all press F5 to se the request on the Console, Network.
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+File: spa
+Initiator: document
+Type: html
+Server --> Browser: HTML-code
+
+(as we can see in the response, there isn't any list (ul) or item (li))
+
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+File: main.css
+Initiator: stylesheet
+Type: css
+Server --> Browser: CSS (style)
+
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+File: spa.js
+Initiator: script
+Type: js
+Server --> Browser: Javascript code
+
+(at this point the browser starts executing the js 
+code that request de Json data)
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+File: data.json
+Initiator: spa.js:31
+Type: json
+Server --> Browser: data
+
+
+
+
+
+
+
+

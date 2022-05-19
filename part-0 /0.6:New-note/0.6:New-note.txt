@@ -1,0 +1,13 @@
+NEW NOTE.
+
+Create a diagram depicting the situation where the user creates 
+a new note using the single page version of the app. 
+
+This action adds a new request:
+
+Browser -> Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+File: new_note_spa
+Initiator: spa.js:43
+Type: json
+Server --> Browser: json-data
+

@@ -1,0 +1,51 @@
+NEW NOTE.
+
+Diagram depicting the situation where the user creates 
+a new note on page https://studies.cs.helsinki.fi/exampleapp/notes 
+when writing something into the text field and clicking the submit button.
+
+Browser -> Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+File: new-note
+Initiator: document
+Type: html
+Server --> Browser: HTML-code
+
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+File: notes
+Initiator: document
+Type: html
+Server --> Browser: HTML-code
+
+(as we can see in the response, there isn't any list (ul) or item (li))
+
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css 
+File: main.css
+Initiator: stylesheet
+Type: css
+Server --> Browser: CSS (style)
+
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+File: main.js
+Initiator: script
+Type: js
+Server --> Browser: Javascript code
+
+(at this point the browser starts executing the js 
+code that request de Json data)
+
+Browser -> Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+File: data.json
+Initiator: main.js:23
+Type: json
+Server --> Browser: data
+
+
+
+
+
+
+
+

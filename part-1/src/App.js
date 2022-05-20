@@ -1,5 +1,7 @@
 import React from "react"
 
+// part1 exercises
+
 const Header = (props) => {
   return (
     <header>

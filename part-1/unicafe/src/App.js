@@ -39,6 +39,10 @@ function App() {
       }
       return result / allFeedbacks.length
     }
+  }
+
+  const positivePercentage = () => {
+    let percentage = 0
     
   }
 

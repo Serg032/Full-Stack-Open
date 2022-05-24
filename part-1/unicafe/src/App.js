@@ -55,7 +55,7 @@ function App() {
         <p>neutral {neutral}</p>
         <p>bad {bad}</p>
         <p>all feeds: {allFeedbacks.join(' ')}</p>
-        <p>average {average()}</p>
+        <p>average: {average()}</p>
       </div>
     </div>
   );

@@ -58,7 +58,6 @@ const App = () => {
     ]
   
   }
-  
 
   return (
     <div>
@@ -70,7 +69,7 @@ const App = () => {
         exercises1 = {course.parts[0].exercises}  
         exercises2 = {course.parts[1].exercises}  
         exercises3 = {course.parts[2].exercises}  
-      />
+        />
       <Total 
         exercises1 = {course.parts[0].exercises}
         exercises2 = {course.parts[1].exercises}

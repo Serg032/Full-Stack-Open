@@ -1,5 +1,18 @@
 import { useState } from "react";
 
+const Statistics = (props) => {
+  return(
+    <div id="statistics">
+        <h1>Statistics</h1>
+        <p>good {props.good}</p>
+        <p>neutral {props.neutral}</p>
+        <p>bad {props.bad}</p>
+        <p>average: {props.average}</p>
+        <p>percentage: {props.percentage}%</p>
+      </div>
+  )
+}
+
 function App() {
 
   const [good, setGood] = useState(0)
@@ -22,28 +35,33 @@ function App() {
     setAllFeedbacks(allFeedbacks.concat('B'))
   }
 
- 
-  const average = () => {
+  const average = (arr) => {
     let result = 0
-    if(allFeedbacks.length === 0){
+    if(arr.length === 0){
       return "No feddbacks yet"
     }else{
-      for(let i = 0; i <= allFeedbacks.length - 1; i++){
-        if(allFeedbacks[i] === "G"){
-          console.log(result += 1)
-        }else if(allFeedbacks[i] === "N"){
+      for(let i = 0; i <= arr.length - 1; i++){
+        if(arr[i] === "G"){
+          result += 1
+        }else if(arr[i] === "N"){
           result += 0
         }else{
           result -= 1
         }
       }
-      return result / allFeedbacks.length
+      return result / arr.length
     }
   }
 
-  const positivePercentage = () => {
-    let percentage = 0
-    
+  const positivePercentage = (arr) => {
+    let positives = 0
+    let total = arr.length
+    for(let i =0; i <= total -1; i++){
+      if(arr[i] === "G"){
+        positives += 1
+      }
+    }
+    return ((positives * 100) / total)
   }
 
   return (
@@ -54,13 +72,13 @@ function App() {
         <button onClick={handleOnClickNeutral}>neutral</button>
         <button onClick={handleOnClickBad}>bad</button>
       </div>
-      <div id="statistics">
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all feeds: {allFeedbacks.join(' ')}</p>
-        <p>average: {average()}</p>
-      </div>
+      <Statistics
+        good = {good}
+        neutral = {neutral}
+        bad = {bad}
+        average = {average(allFeedbacks)}
+        percentage = {positivePercentage(allFeedbacks)}
+      />      
     </div>
   );
 }

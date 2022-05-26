@@ -1,5 +1,15 @@
 import { useState } from "react";
 
+const StatisticLine = (props) => {
+  return(
+    <tr>
+      <td>{props.text}:</td>
+      <td>{props.value}</td>
+    </tr>
+
+  )
+}
+
 const Statistics = (props) => {
   
     if(props.total === 0){
@@ -14,11 +24,26 @@ const Statistics = (props) => {
       return (
         <div id="statistics">
         <h1>Statistics</h1>
-        <p>good {props.good}</p>
-        <p>neutral {props.neutral}</p>
-        <p>bad {props.bad}</p>
-        <p>average: {props.average}</p>
-        <p>percentage: {props.percentage}%</p>
+        <table>
+          <tbody>
+            <StatisticLine
+            text = "good"
+            value = {props.good}/>
+            <StatisticLine
+            text = "neutral"
+            value = {props.neutral}/>
+            <StatisticLine
+            text = "bad"
+            value = {props.bad}/>
+            <StatisticLine
+            text = "average"
+            value = {props.average}/>
+            <StatisticLine
+            text = "percentage"
+            value = {props.percentage} />
+          </tbody>
+        </table>
+       
       </div>
       )
     }
@@ -66,7 +91,7 @@ function App() {
           result -= 1
         }
       }
-      return result / arr.length
+      return (result / arr.length).toFixed(2) 
     }
   }
 
@@ -76,13 +101,13 @@ function App() {
     if(arr.length === 0){
       return 'No feedbacks'
     }else{
-      for(let i =0; i <= total -1; i++){
+      for(let i = 0; i <= total -1; i++){
         if(arr[i] === "G"){
           positives += 1
         }
       }
     }
-    return ((positives * 100) / total)
+    return ((positives * 100) / total).toFixed(2) + "%"
   }
 
   return (

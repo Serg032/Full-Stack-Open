@@ -3,7 +3,13 @@ import { useState } from "react";
 const Statistics = (props) => {
   
     if(props.total === 0){
-      return "No statistics"
+      return (
+        <div>
+          <h1>Statistics</h1>
+          <p>No feedbacks yet</p>
+        </div>
+       
+      )
     }else{
       return (
         <div id="statistics">
@@ -70,7 +76,6 @@ function App() {
         }
       }
     }
-    
     return ((positives * 100) / total)
   }
 

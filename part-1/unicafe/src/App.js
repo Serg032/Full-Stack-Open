@@ -24,6 +24,12 @@ const Statistics = (props) => {
     }
 }
 
+const Button = (props) => {
+  return(
+    <button onClick={props.function}>{props.text}</button>
+  )
+}
+
 function App() {
 
   const [good, setGood] = useState(0)
@@ -83,9 +89,16 @@ function App() {
     <div id="unicafe">
       <h1>give feedback</h1>
       <div id="buttons">
-        <button onClick={handleOnClickGood}>good</button>
-        <button onClick={handleOnClickNeutral}>neutral</button>
-        <button onClick={handleOnClickBad}>bad</button>
+        <Button 
+        function = {handleOnClickGood}
+        text = "good"
+          />
+        <Button 
+        function = {handleOnClickNeutral}
+        text = "neutral"/>
+        <Button 
+        function = {handleOnClickBad}
+        text = "bad"/>
       </div>
       <br/>
       <Statistics

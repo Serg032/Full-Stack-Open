@@ -8,12 +8,10 @@ const Header = (props) => {
   )
 }
 
-const Content = (props) => {
-  return (
+const Part = (props) => {
+  return(
     <main>
-      <p>{props.name1} {props.exercises1}</p>
-      <p>{props.name2} {props.exercises2}</p>
-      <p>{props.name3} {props.exercises3}</p>
+      <p>{props.name} {props.exercises}</p>
     </main>
   )
 }
@@ -32,50 +30,58 @@ const Total = (props) => {
   )
 }
 
+const Course = (props) => {
+ return(
+   <div>
+      <Header 
+      course = {props.title}/>
+      <Part 
+      name = {props.name}
+      exercises = {props.exercises}/>
+      <Part 
+      name = {props.name1}
+      exercises = {props.exercises1}/>
+      <Part 
+      name = {props.name2}
+      exercises = {props.exercises2}/>
+   </div>
+   
+ )
+}
+
 const App = () => {
-
   const course = {
-
+    id: 1,
     name: 'Half Stack application development',
-    
     parts: [
-    
       {
         name: 'Fundamentals of React',
-        exercises: 10
+        exercises: 10,
+        id: 1
       },
-    
       {
         name: 'Using props to pass data',
-        exercises: 7
+        exercises: 7,
+        id: 2
       },
-    
       {
         name: 'State of a component',
-        exercises: 14
+        exercises: 14,
+        id: 3
       }
-    
     ]
-  
   }
-
+  
   return (
-    <div>
-      <Header course = {course.name} />
-      <Content 
-        name1 = {course.parts[0].name}
-        name2 = {course.parts[1].name}
-        name3 = {course.parts[2].name}
-        exercises1 = {course.parts[0].exercises}  
-        exercises2 = {course.parts[1].exercises}  
-        exercises3 = {course.parts[2].exercises}  
-        />
-      <Total 
-        exercises1 = {course.parts[0].exercises}
-        exercises2 = {course.parts[1].exercises}
-        exercises3 = {course.parts[2].exercises}
-        />
-    </div>
+      <Course
+      title = {course.name}
+      name = {course.parts[0].name}
+      exercises = {course.parts[0].exercises}
+      name1 = {course.parts[1].name}
+      exercises1 = {course.parts[1].exercises}
+      name2 = {course.parts[2].name}
+      exercises2 = {course.parts[2].exercises}
+      />
   )
 }
  

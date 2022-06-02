@@ -18,19 +18,14 @@ const Part = (props) => {
 
 const Total = (props) => {
 
-  const total = 
-    [props.exercises, 
-    props.exercises1, 
-    props.exercises2,
-    props.exercises3]
-
-  const result = total.reduce((acc, crv) => {
+  const array = props.exercs
+  const result = array.reduce((acc, crv) => {
     return acc + crv
   }, 0)
 
   return (
     <footer>
-      <p><b>Number of exercicses {result}</b></p>
+      <p><b>total of {result} exercises</b></p>
     </footer>
   )
 }
@@ -53,17 +48,15 @@ const Course = (props) => {
       name = {props.name3}
       exercises = {props.exercises3}/>
       <Total
-      exercises = {props.exercisesSum}
-      exercises1 = {props.exercises1Sum}
-      exercises2 = {props.exercises2Sum}
-      exercises3 = {props.exercises3Sum}/>
+      exercs = {props.exercisess}
+      />
    </div>
-   
  )
 }
 
 const App = () => {
-  const course = {
+  const course = [
+    {
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -88,24 +81,60 @@ const App = () => {
         id: 4
       }
     ]
+  },
+  {
+    name: 'Node.js',
+    id: 2,
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
+      },
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
+    ]
   }
+]
   
   return (
+    <div>
       <Course
-      title = {course.name}
-      name = {course.parts[0].name}
-      exercises = {course.parts[0].exercises}
-      name1 = {course.parts[1].name}
-      exercises1 = {course.parts[1].exercises}
-      name2 = {course.parts[2].name}
-      exercises2 = {course.parts[2].exercises}
-      name3 = {course.parts[3].name}
-      exercises3 = {course.parts[3].exercises}
-      exercisesSum = {course.parts[0].exercises}
-      exercises1Sum = {course.parts[1].exercises}
-      exercises2Sum = {course.parts[2].exercises}
-      exercises3Sum = {course.parts[3].exercises}
+      title = {course[0].name}
+      name = {course[0].parts[0].name}
+      exercises = {course[0].parts[0].exercises}
+      name1 = {course[0].parts[1].name}
+      exercises1 = {course[0].parts[1].exercises}
+      name2 = {course[0].parts[2].name}
+      exercises2 = {course[0].parts[2].exercises}
+      name3 = {course[0].parts[3].name}
+      exercises3 = {course[0].parts[3].exercises}
+      exercisess = {
+        [
+        course[0].parts[0].exercises, 
+        course[0].parts[1].exercises,
+        course[0].parts[2].exercises,
+        course[0].parts[3].exercises
+      ]
+    }
       />
+      <Course
+       title = {course[1].name}
+       name = {course[1].parts[0].name}
+       exercises = {course[1].parts[0].exercises}
+       name1 = {course[1].parts[1].name}
+       exercises1 = {course[1].parts[1].exercises}
+       exercisess = {
+         [
+          course[1].parts[0].exercises,
+          course[1].parts[1].exercises
+       ]
+      }
+      />
+    </div>
   )
 }
  

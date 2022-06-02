@@ -19,14 +19,18 @@ const Part = (props) => {
 const Total = (props) => {
 
   const total = 
-    props.exercises + 
-    props.exercises1 + 
-    props.exercises2 +
-    props.exercises3
+    [props.exercises, 
+    props.exercises1, 
+    props.exercises2,
+    props.exercises3]
+
+  const result = total.reduce((acc, crv) => {
+    return acc + crv
+  }, 0)
 
   return (
     <footer>
-      <p><b>Number of exercicses {total}</b></p>
+      <p><b>Number of exercicses {result}</b></p>
     </footer>
   )
 }

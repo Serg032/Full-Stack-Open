@@ -1,5 +1,9 @@
 import "./App.css"
 import { useState } from 'react'
+import Title from "./components/title"
+import Filter from "./components/filter"
+import AddContact from "./components/addContact"
+import Main from "./components/main"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -61,55 +65,25 @@ const App = () => {
 
   return (
     <div id="main">
-      <h2>Phonebook</h2>
-      <div>
-        filter shown with
-        <input
-        type="text"
-        placeholder="...filter by"
-        value={filtered}
-        onChange={handleChangeFilter}
-        />
-        <button onClick={clear}>clear</button>
-      </div>
+      <Title title = "Phonebook"/>
+      <Filter
+      value = {filtered}
+      eventHandler = {handleChangeFilter}
+      function = {clear}
+      />
       <br/>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            name:
-            <input
-            value={newName} 
-            type="text" 
-            placeholder='...name'
-            onChange={handleChangeName}
-            />
-          </div>
-          <div>
-            number
-            <input
-            value={newNumber}
-            type="text"
-            placeholder='...phone number'
-            onChange={handleChangePhone}
-            />
-          </div>
-         
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      {filtered === "" ? 
-      <div>
-        <h2>Numbers</h2>
-        {persons.map(p => (
-        <p key={p.id}>{p.id}. {p.name}. {p.number}</p>
-        ))}
-      </div> : 
-      <div>
-      <h2>Numbers</h2>
-      <div>{filtering(filtered)}</div>
-      </div>}
+      <AddContact
+      eventSubmit = {handleSubmit}
+      valueName = {newName}
+      eventName = {handleChangeName}
+      valueNumber = {newNumber}
+      eventNumber = {handleChangePhone}
+      />
+      <Main
+      value = {filtered}
+      arr = {persons}
+      function = {filtering(filtered)}
+      />
     </div>
   )
 }

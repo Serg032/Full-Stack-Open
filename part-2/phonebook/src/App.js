@@ -11,14 +11,24 @@ const App = () => {
     const newPerson = {
       name: newName
     }
-    setPersons(persons.concat(newPerson))
-    setNewName(" ")
+    if (persons.find(p => p.name === newPerson.name)){
+      alert(`${newPerson.name} already exists`)
+      setNewName("")
+    } else {
+      setPersons(persons.concat(newPerson))
+      setNewName(" ")
+    }
+  
   }
 
   const handleOnChange = (e) => {
     setNewName(e.target.value)
   }
-console.log(persons)
+
+  const result = persons.map(p => p)
+  console.log("result", result)
+  console.log("newPerson", newName)
+
   return (
     <div>
       <h2>Phonebook</h2>

@@ -18,9 +18,7 @@ const App = () => {
   const handleOnChange = (e) => {
     setNewName(e.target.value)
   }
-
-  console.log(persons)
-
+console.log(persons)
   return (
     <div>
       <h2>Phonebook</h2>

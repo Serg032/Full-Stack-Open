@@ -1,71 +1,37 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Title from './components/title';
-import Finder from './components/finder';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Finder from "./components/finder";
+import ShowResults from "./components/showResults";
+import Title from "./components/title";
 
-function App() {
-
-  const [countries, setCountries] = useState([])
-  const [name, setName] = useState("belgium")
+const App = () => {
+  const [countries, setCountries] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
 
   useEffect(() => {
-    axios
-    .get(`https://restcountries.com/v3.1/name/${name}`)
-    .then(response => {
-      setCountries(response.data)
-    })
-  },[name])
+    console.log("Effect");
+    axios.get("https://restcountries.com/v3.1/all").then((response) => {
+      setCountries(response.data);
+    });
+  }, []);
 
-  const finder = (event) => {
-    setName(event.target.value)
-  }
+  const filteredCountries = countries.filter((country) =>
+    country.name.common.toLowerCase().includes(searchFilter.toLowerCase())
+  );
 
-  console.log(countries)
+  const handleChange = (e) => {
+    setSearchFilter(e.target.value);
+  };
+
+  console.log(filteredCountries.length);
 
   return (
     <div>
-      <Title 
-      title = "Data for Countries"
-      />
-      <Finder
-        value = {name}
-        function = {finder}
-      />
-      {countries.length === 0 ? <p>No results</p>
-      : countries.length === 1 ? countries.map(c => (
-        <div key={c.name.common}>
-          <h2>{c.name.common}</h2>
-          <div>
-            <p>capital {c.capital[0]}</p>
-            <p>area {c.area}</p>
-            <br/>
-            <b>languages</b>
-            <ul>
-              {Object.values(countries[0].languages).map(language => (
-                  <li>{language}</li>
-                ))}
-            </ul>
-            <div>
-              <img 
-              src={c.flags.png}
-              alt={c.name.common}
-              />
-            </div>
-            
-          </div>
-        </div>
-      ))
-      : countries.length < 10 ? countries.map(c => (
-        <div key={c.name.common}>
-          <p>{c.name.common}</p>
-        </div>
-      ))
-      : countries.length > 9 ? <p>Please, give us more information</p>
-      : <p>Something went wrong</p>
-    }
+      <Title title="Data for Countries" />
+      <Finder value={searchFilter} function={handleChange} />
+      <ShowResults results={filteredCountries} state={setSearchFilter} />
     </div>
   );
-}
+};
 
 export default App;
-

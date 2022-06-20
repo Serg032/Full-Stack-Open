@@ -4,20 +4,20 @@ import Title from "./components/title";
 import Filter from "./components/filter";
 import AddContact from "./components/addContact";
 import Main from "./components/main";
-import axios from "axios";
+import peopleService from "./services/requests";
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
+  const [people, setPeople] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filtered, setFiltered] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
-      console.log("reponse", response.data);
+    peopleService.getPeople().then((response) => {
+      setPeople(response.data);
+      console.log(response.data);
     });
-  }, [persons.length]);
+  }, [people.length]);
 
   const handleChangeName = (e) => {
     setNewName(e.target.value);
@@ -32,23 +32,21 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: persons[persons.length - 1].id + 1,
+      id: people[people.length - 1].id + 1,
     };
-    if (persons.find((p) => p.name === newPerson.name)) {
+    if (people.find((p) => p.name === newPerson.name)) {
       alert(`${newPerson.name} name already exists`);
       setNewName("");
-    } else if (persons.find((p) => p.number === newPerson.number)) {
+    } else if (people.find((p) => p.number === newPerson.number)) {
       alert(`${newPerson.number} number already exists`);
       setNewNumber("");
     } else {
-      axios
-        .post(" http://localhost:3001/persons", newPerson)
-        .then((response) => {
-          console.log("added", response);
-          setPersons(persons.concat(response.data));
-          setNewName("");
-          setNewNumber("");
-        });
+      peopleService.createPerson(newPerson).then((response) => {
+        console.log("created", response.data);
+        setPeople(people.concat(response.data));
+        setNewName("");
+        setNewNumber("");
+      });
     }
   };
 
@@ -57,7 +55,7 @@ const App = () => {
   };
 
   const filtering = (str) => {
-    const result = persons.filter((contact) =>
+    const result = people.filter((contact) =>
       contact.name.toLowerCase().includes(str.toLowerCase())
     );
     if (result === []) {
@@ -92,7 +90,7 @@ const App = () => {
         valueNumber={newNumber}
         eventNumber={handleChangePhone}
       />
-      <Main value={filtered} arr={persons} function={filtering(filtered)} />
+      <Main value={filtered} arr={people} function={filtering(filtered)} />
     </div>
   );
 };

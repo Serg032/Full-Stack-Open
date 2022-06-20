@@ -36,7 +36,6 @@ const ShowResults = (props) => {
           ))}
         </ul>
         <img alt={country.name.common} src={country.flags.png} width="20%" />
-        <h3>Weather in {country.capital}</h3>
       </div>
     );
   }

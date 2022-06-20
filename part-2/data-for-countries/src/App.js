@@ -9,21 +9,17 @@ const App = () => {
   const [searchFilter, setSearchFilter] = useState("");
 
   useEffect(() => {
-    console.log("Effect");
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       setCountries(response.data);
     });
   }, []);
 
-  const filteredCountries = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(searchFilter.toLowerCase())
-  );
-
   const handleChange = (e) => {
     setSearchFilter(e.target.value);
   };
-
-  console.log(filteredCountries.length);
+  const filteredCountries = countries.filter((country) =>
+    country.name.common.toLowerCase().includes(searchFilter.toLowerCase())
+  );
 
   return (
     <div>

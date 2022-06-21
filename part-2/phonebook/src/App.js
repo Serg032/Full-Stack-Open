@@ -17,7 +17,7 @@ const App = () => {
       setPeople(response.data);
       console.log(response.data);
     });
-  }, [people.length]);
+  }, []);
 
   const handleChangeName = (e) => {
     setNewName(e.target.value);

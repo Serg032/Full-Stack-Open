@@ -3,7 +3,12 @@ import Title from "./title";
 import peopleService from "../services/requests";
 const Main = (props) => {
   const arr = props.arr;
-
+  //   const handleClick = (name, id) => {
+  //     peopleService.removePerson(name, id).then((response) => {
+  //       console.log(response)
+  //       props.setState(prevState => prevState.filter(p => p.id));
+  //     });
+  //   };
   return (
     <div>
       {props.value === "" ? (
@@ -16,7 +21,14 @@ const Main = (props) => {
               </p>
               <button
                 value={p.id}
-                onClick={() => peopleService.deletePerson(p.id)}
+                onClick={() => {
+                  peopleService.removePerson(
+                    p.name,
+                    p.id,
+                    props.state,
+                    props.setState
+                  );
+                }}
               >
                 delete
               </button>

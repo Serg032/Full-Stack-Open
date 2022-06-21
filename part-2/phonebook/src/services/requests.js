@@ -10,13 +10,16 @@ const createPerson = (newObject) => {
   return axios.post(url, newObject);
 };
 
-const deletePerson = (id) => {
-  console.log("delete request");
-  return axios.delete(`${url}/${id}`);
+const removePerson = (name, id, state, setState) => {
+  if (window.confirm(`Delete ${name}?`)) {
+    return axios
+      .delete(`${url}/${id}`)
+      .then(setState((state) => state.filter((person) => person.id !== id)));
+  }
 };
 
 export default {
   getPeople: getPeople,
   createPerson: createPerson,
-  deletePerson: deletePerson,
+  removePerson: removePerson,
 };

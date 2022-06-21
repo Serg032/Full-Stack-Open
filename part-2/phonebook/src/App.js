@@ -73,7 +73,7 @@ const App = () => {
   };
 
   const clear = () => setFiltered("");
-
+  console.log(people);
   return (
     <div id="main">
       <Title title="Phonebook" />
@@ -90,7 +90,13 @@ const App = () => {
         valueNumber={newNumber}
         eventNumber={handleChangePhone}
       />
-      <Main value={filtered} arr={people} function={filtering(filtered)} />
+      <Main
+        value={filtered}
+        arr={people}
+        function={filtering(filtered)}
+        state={people}
+        setState={setPeople}
+      />
     </div>
   );
 };

@@ -5,17 +5,18 @@ import Filter from "./components/filter";
 import AddContact from "./components/addContact";
 import Main from "./components/main";
 import peopleService from "./services/requests";
+import Notification from "./components/error";
 
 const App = () => {
   const [people, setPeople] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filtered, setFiltered] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     peopleService.getPeople().then((response) => {
       setPeople(response.data);
-      console.log(response.data);
     });
   }, []);
 
@@ -35,15 +36,24 @@ const App = () => {
       id: people[people.length - 1].id + 1,
     };
     if (people.find((p) => p.name === newPerson.name)) {
-      alert(`${newPerson.name} name already exists`);
+      setError(`${newPerson.name} name already exists.`);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
       setNewName("");
     } else if (people.find((p) => p.number === newPerson.number)) {
-      alert(`${newPerson.number} number already exists`);
+      setError(`${newPerson.number} number already exists.`);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
       setNewNumber("");
     } else {
       peopleService.createPerson(newPerson).then((response) => {
-        console.log("created", response.data);
         setPeople(people.concat(response.data));
+        setError(false);
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         setNewName("");
         setNewNumber("");
       });
@@ -72,11 +82,14 @@ const App = () => {
     ));
   };
 
-  const clear = () => setFiltered("");
-  console.log(people);
+  const clear = () => {
+    setFiltered("");
+    setError(null);
+  };
   return (
     <div id="main">
       <Title title="Phonebook" />
+      <Notification message={error} />
       <Filter
         value={filtered}
         eventHandler={handleChangeFilter}
@@ -96,6 +109,7 @@ const App = () => {
         function={filtering(filtered)}
         state={people}
         setState={setPeople}
+        error={setError}
       />
     </div>
   );

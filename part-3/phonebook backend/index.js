@@ -28,6 +28,7 @@ let data = [
 app.use(express.json());
 
 app.get("/api/persons", (request, response) => {
+  console.log("length", data.length);
   response.json(data);
 });
 
@@ -45,8 +46,16 @@ app.get("/api/persons/info", (req, res) => {
 app.get("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   const person = data.find((p) => p.id === id);
-  console.log(person);
-  response.json(person);
+  // console.log(person);
+  // response.json(person);
+  if (person) {
+    console.log("Success", person);
+    response.json(person);
+  } else {
+    return response
+      .status(404)
+      .json({ error: `No person with id: ${id} found.` });
+  }
 });
 
 app.listen(port, () => {

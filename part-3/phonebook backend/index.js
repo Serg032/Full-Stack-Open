@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const port = 3001;
 const morgan = require(`morgan`);
-
+morgan.token("type", function (req, res) {
+  return req.body;
+});
 let data = [
   {
     id: 1,
@@ -25,15 +27,27 @@ let data = [
     number: "39-23-6423122",
   },
 ];
-const process = (request, response, next) => {
-  console.log("Learning Express.js");
-  console.log("REMEMBER. Issue at 3.6, Post error handling");
-  next();
-};
+// const process = (request, response, next) => {
+//   console.log("Learning Express.js");
+//   console.log("REMEMBER. Issue at 3.6, Post error handling");
+//   next();
+// };
 
-app.use(process);
+// app.use(process);
 app.use(express.json());
-app.use(morgan(`tiny`));
+app.use(
+  morgan(function (tokens, req, res) {
+    return [
+      tokens.method(req.body, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req.body, res, "content-length"),
+      "-",
+      tokens["response-time"](req.body, res),
+      "ms",
+    ].join(" ");
+  })
+);
 
 app.get("/api/persons", (request, response) => {
   response.json(data);

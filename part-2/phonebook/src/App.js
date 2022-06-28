@@ -18,7 +18,7 @@ const App = () => {
     peopleService.getPeople().then((response) => {
       setPeople(response.data);
     });
-  }, []);
+  }, [people.length]);
 
   const handleChangeName = (e) => {
     setNewName(e.target.value);
@@ -65,19 +65,21 @@ const App = () => {
   };
 
   const filtering = (str) => {
-    const result = people.filter((contact) =>
-      contact.name.toLowerCase().includes(str.toLowerCase())
+    console.log("p at fil", people);
+    const result = people.filter((personTest) =>
+      personTest.name.toLowerCase().includes(str.toLowerCase())
     );
     if (result === []) {
       return (
         <p>
-          <b>No contacts found</b>
+          <b>No personTests found</b>
         </p>
       );
     }
-    return result.map((contact) => (
-      <p key={contact.name}>
-        {contact.id}. {contact.name}. {contact.number}
+    console.log("result", result);
+    return result.map((pp) => (
+      <p key={pp.name}>
+        {pp.id}. {pp.name}. {pp.number}
       </p>
     ));
   };

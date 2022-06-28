@@ -3,7 +3,6 @@ import Title from "./title";
 import peopleService from "../services/requests";
 const Main = (props) => {
   const arr = props.arr;
-
   return (
     <div>
       {props.value === "" ? (

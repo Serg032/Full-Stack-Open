@@ -49,7 +49,7 @@ const App = () => {
       setNewNumber("");
     } else {
       peopleService.createPerson(newPerson).then((response) => {
-        setPeople(people.concat(response.data));
+        setPeople(people.concat(newPerson));
         setError(false);
         setTimeout(() => {
           setError(null);

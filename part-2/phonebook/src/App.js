@@ -65,9 +65,8 @@ const App = () => {
   };
 
   const filtering = (str) => {
-    console.log("p at fil", people);
-    const result = people.filter((personTest) =>
-      personTest.name.toLowerCase().includes(str.toLowerCase())
+    const result = people.filter((person) =>
+      person.name.toLowerCase().includes(str.toLowerCase())
     );
     if (result === []) {
       return (
@@ -76,7 +75,6 @@ const App = () => {
         </p>
       );
     }
-    console.log("result", result);
     return result.map((pp) => (
       <p key={pp.name}>
         {pp.id}. {pp.name}. {pp.number}

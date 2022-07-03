@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://phonebook-nodejs-srp.herokuapp.com/api/persons";
+const url = "https://phonebook-nodejs-srp.herokuapp.com/api/persons/";
 
 const getPeople = () => {
   return axios.get(url);

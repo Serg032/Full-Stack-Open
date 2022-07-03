@@ -1,3 +1,4 @@
+// Backend web development
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
@@ -27,6 +28,7 @@ let data = [
   },
 ];
 app.use(cors());
+app.use(express.static("build"));
 app.use(express.json());
 app.use(
   morgan(function (tokens, req, res) {
